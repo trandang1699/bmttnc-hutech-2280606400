@@ -72,8 +72,7 @@ class RailFenceCipher:
 
             plain_text_chars.append(actual_rails[rail_index][read_indices[rail_index]])
             read_indices[rail_index] += 1
-            
-            # Update rail_index and direction
+
             if rail_index == 0:
                 direction = 1
             elif rail_index == num_rails - 1:
@@ -83,22 +82,20 @@ class RailFenceCipher:
         plain_text = ''.join(plain_text_chars)
         return plain_text
 
-# Example Usage:
+
 if __name__ == "__main__":
     cipher = RailFenceCipher()
 
-    # Encryption test
     plain1 = "WEAREDISCOVEREDFLEEATONCE"
     key1 = 3
     encrypted1 = cipher.rail_fence_encrypt(plain1, key1)
     print(f"Plain Text: '{plain1}'")
     print(f"Key: {key1}")
-    print(f"Encrypted: '{encrypted1}'") # Expected: WECRLTEERDSOEEFEAOCAIVDEN
+    print(f"Encrypted: '{encrypted1}'") 
 
-    # Decryption test
     decrypted1 = cipher.rail_fence_decrypt(encrypted1, key1)
     print(f"Decrypted: '{decrypted1}'")
-    assert decrypted1 == plain1.upper() # Check against original (assuming input is upper/case-insensitive)
+    assert decrypted1 == plain1.upper() 
 
     plain2 = "HELLO WORLD"
     key2 = 4
@@ -122,23 +119,22 @@ if __name__ == "__main__":
     print(f"Decrypted: '{decrypted3}'")
     assert decrypted3 == plain3.upper()
 
-    # Test with edge cases or potential issues
+
     try:
         cipher.rail_fence_encrypt("TEST", 1)
     except ValueError as e:
-        print(f"\nError: {e}") # Expected: Number of rails must be an integer greater than or equal to 2.
+        print(f"\nError: {e}") 
 
     try:
         cipher.rail_fence_decrypt("TEST", 0)
     except ValueError as e:
-        print(f"Error: {e}") # Expected: Number of rails must be an integer greater than or equal to 2.
-
+        print(f"Error: {e}") 
     plain4 = "SHORT"
-    key4 = 10 # More rails than text length
+    key4 = 10 
     encrypted4 = cipher.rail_fence_encrypt(plain4, key4)
     print(f"\nPlain Text: '{plain4}'")
     print(f"Key: {key4}")
     print(f"Encrypted: '{encrypted4}'")
     decrypted4 = cipher.rail_fence_decrypt(encrypted4, key4)
     print(f"Decrypted: '{decrypted4}'")
-    assert decrypted4 == plain4.upper() # Should still work
+    assert decrypted4 == plain4.upper() 
